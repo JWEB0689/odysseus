@@ -1,10 +1,11 @@
 name: ci / PR checks
 
 on:
-  # pull_request_target runs in the base-repo context (has secrets) so the check
-  # works on fork PRs. Safe here: the checkout pins to the base branch (no fork
-  # code runs) and the scripts only read context.payload and call the GitHub API.
-  pull_request:  # zizmor: ignore[dangerous-triggers]
+  # pull_request (migrated from pull_request_target Oct 2026: GitHub blocks
+  # pull_request_target in public repos without an Actions policy as of Nov 2, 2026).
+  # Safe here: the checkout pins to the base branch (no fork code runs) and the
+  # scripts only read context.payload and call the GitHub API.
+  pull_request:
     types: [opened, edited, synchronize, reopened, ready_for_review]
 
 # Default-deny at the workflow level; each job opts into only the scopes it needs.
